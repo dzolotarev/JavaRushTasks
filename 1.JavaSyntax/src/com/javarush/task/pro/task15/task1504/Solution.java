@@ -18,10 +18,11 @@ public class Solution {
         //String dest = "/Users/denis/Downloads/copy.txt";
 
         Scanner scanner = new Scanner(System.in);
-        String src = scanner.nextLine();
-        String dest = scanner.nextLine();
-        InputStream input = Files.newInputStream(Path.of(src));
-        OutputStream output = Files.newOutputStream(Path.of(dest));
+//        String src = scanner.nextLine();
+//        String dest = scanner.nextLine();
+
+            InputStream input = Files.newInputStream(Path.of(scanner.nextLine()));
+            OutputStream output = Files.newOutputStream(Path.of(scanner.nextLine()));
 
         byte[] buffer = new byte[1];
         byte[] buffer_ = new byte[1];
