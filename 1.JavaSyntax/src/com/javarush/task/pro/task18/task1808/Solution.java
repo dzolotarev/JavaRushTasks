@@ -1,10 +1,10 @@
-package com.javarush.task.pro.task18.task1807;
+package com.javarush.task.pro.task18.task1808;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 /* 
-Прощание с foreach
+Знакомство со ссылками на методы
 */
 
 public class Solution {
@@ -16,8 +16,6 @@ public class Solution {
     }
 
     public static void print(ArrayList<String> strings) {
-        for (int i = 0; i < strings.size(); i++) {
-            System.out.println(strings.get(i));
-        }
+        strings.forEach(System.out::println);
     }
 }
