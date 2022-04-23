@@ -13,32 +13,18 @@ public class Solution {
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader buffer = new BufferedReader(input);
         String filePath = buffer.readLine();
-        List<Integer> arrayBytes = new ArrayList<>();
-
-
+        int[] resultArray = new int[256];
         try (FileInputStream fileInputStream = new FileInputStream(filePath)) {
             while (fileInputStream.available() > 0) {
-                int b = fileInputStream.read();
-                arrayBytes.add(b);
+                resultArray[fileInputStream.read()] += 1;
             }
-        }
-
-        int[] resultArray = new int[256];
-
-        for (Integer integer : arrayBytes) {
-            resultArray[integer] = resultArray[integer] + 1;
         }
         int max = -1;
         for (int i = 0; i < resultArray.length; i++) {
-            if (resultArray[i] > max) {
-                max = resultArray[i];
-            }
+            if (resultArray[i] > max) max = resultArray[i];
         }
         for (int i = 0; i < resultArray.length; i++) {
-            if (resultArray[i] == max) {
-                System.out.print(i + " ");
-            }
+            if (resultArray[i] == max) System.out.print(i + " ");
         }
-
     }
 }
