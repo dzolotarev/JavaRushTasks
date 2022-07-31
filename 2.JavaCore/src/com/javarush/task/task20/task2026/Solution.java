@@ -19,44 +19,13 @@ public class Solution {
                 {1, 0, 0, 1}
         };
 
-//        int count1 = getRectangleCount(a1);
-//        System.out.println("count = " + count1 + ". Должно быть 2");
-//        int count2 = getRectangleCount(a2);
-//        System.out.println("count = " + count2 + ". Должно быть 4");
-        //findCoordinates(a1);
-        findCoordinates(a2);
+        int count1 = getRectangleCount(a1);
+        System.out.println("count = " + count1 + ". Должно быть 2");
+        int count2 = getRectangleCount(a2);
+        System.out.println("count = " + count2 + ". Должно быть 4");
     }
 
     public static int getRectangleCount(byte[][] a) {
-        int count = 0;
-
-        return count;
+        return 0;
     }
-
-    public static void findCoordinates(byte[][] a) {
-        int y = 0, x = 0;
-        int stepX = 0;
-
-//y < a.length
-        while (true) {
-            if (a[y][x] == 1) {
-                x++;
-                stepX++;
-                System.out.print(" * ");
-            } else {
-                if (y < a.length-1) {
-                    System.out.println();
-                    y++;
-                    x = x - stepX;
-                    stepX = 0;
-                } else {
-                    x++;
-                    y=0;
-                }
-
-
-            }
-        }
-    }
-
 }
