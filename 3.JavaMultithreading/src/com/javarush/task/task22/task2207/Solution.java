@@ -35,7 +35,6 @@ public class Solution {
 
         String str0 = sb.toString().trim();
         String[] tmpStr = str0.split(" ");
-        //System.out.println(str0);
         List<String> list = new LinkedList<>(Arrays.asList(tmpStr));
         for (int i = 0; i < list.size(); i++) {
             String str1 = list.get(i);
@@ -53,6 +52,25 @@ public class Solution {
             }
             i--;
         }
+//        for (int i = 0; i < words.size(); i++) {
+//            for (int j = 0; j < words.size(); ) {
+//                if (i >= words.size()) {
+//                    break;
+//                }
+//                if (words.get(j).equals(new StringBuilder(words.get(i)).reverse().toString()) && j != i) {
+//                    Pair pair = new Pair();
+//                    pair.first = words.get(j);
+//                    pair.second = words.get(i);
+//                    result.add(pair);
+//                    words.remove(j);
+//                    words.remove(i);
+//                    j = 0;
+//                } else
+//                    j++;
+//            }
+//        }
+
+
 
 
         for (Pair pair : result) {
