@@ -1,6 +1,9 @@
 package com.javarush.task.task24.task2412;
 
-import java.text.*;
+import java.text.ChoiceFormat;
+import java.text.Format;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /* 
@@ -10,7 +13,7 @@ import java.util.*;
 public class Solution {
     public static void main(String[] args) {
         List<Stock> stocks = getStocks();
-//        sort(stocks);
+        sort(stocks);
         Date actualDate = new Date();
         printStocks(stocks, actualDate);
     }
@@ -20,14 +23,11 @@ public class Solution {
 
         double[] filelimits = {0d, actualDate.getTime()};
         String[] filepart = {"change {4}", "open {2} and last {3}"};
-        ChoiceFormat fileform = new ChoiceFormat(filelimits, filepart); //3
 
+        ChoiceFormat fileform = new ChoiceFormat(filelimits, filepart);
         Format[] testFormats = {null, dateFormat, fileform};
-
-        MessageFormat pattform = new MessageFormat("{0}   {1} | {5} {6}"); //1
+        MessageFormat pattform = new MessageFormat("{0}   {1} | {5} {6}");
         pattform.setFormats(testFormats);
-//        Fake Apple Inc. AAPL | 17-11-2025 open 125,64 and last 123,43
-//        Fake Applied Materials, Inc. AMAT | 15-01-1983 change 0,26
 
         for (Stock stock : stocks) {
             String name = ((String) stock.get("name"));
@@ -36,8 +36,7 @@ public class Solution {
             double last = !stock.containsKey("last") ? 0 : ((double) stock.get("last"));
             double change = !stock.containsKey("change") ? 0 : ((double) stock.get("change"));
             Date date = (Date) stock.get("date");
-            Object[] testArgs = {name, symbol, open, last, change, date, date.getTime()}; //2
-
+            Object[] testArgs = {name, symbol, open, last, change, date, date.getTime()};
             System.out.println(pattform.format(testArgs));
         }
     }
