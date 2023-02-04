@@ -19,7 +19,8 @@ public class Solution {
     }
 
     public Process getStartNotepadProcess(String fileName) throws IOException {
-        String[] cmdArray = new String[]{"notepad.exe", fileName};
+        //String[] cmdArray = new String[]{"notepad.exe", fileName};
+        String[] cmdArray = new String[]{"textedit.app", fileName};
         return Runtime.getRuntime().exec(cmdArray);
     }
 
