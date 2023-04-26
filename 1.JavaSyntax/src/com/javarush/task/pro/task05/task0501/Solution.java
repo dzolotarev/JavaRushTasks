@@ -5,9 +5,10 @@ package com.javarush.task.pro.task05.task0501;
 */
 
 public class Solution {
+    //напишите тут ваш код
     public static void main(String[] args) {
     int[] intArray = new int[10];
     double[] doubleArray = new double[10];
-    //напишите тут ваш код
     }
+
 }
