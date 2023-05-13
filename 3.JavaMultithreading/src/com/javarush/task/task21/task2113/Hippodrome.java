@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Hippodrome {
     static Hippodrome game;
-
     private List<Horse> horses;
 
     public Hippodrome(List<Horse> horses) {
