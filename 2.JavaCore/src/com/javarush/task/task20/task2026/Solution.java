@@ -28,9 +28,7 @@ public class Solution {
     public static int getRectangleCount(byte[][] arr) {
         byte[][] a = new byte[arr.length][arr[0].length];
         for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < a.length; j++) {
-                a[i][j] = arr[i][j];
-            }
+            System.arraycopy(arr[i], 0, a[i], 0, a.length);
         }
 
         int hor = a[0].length;

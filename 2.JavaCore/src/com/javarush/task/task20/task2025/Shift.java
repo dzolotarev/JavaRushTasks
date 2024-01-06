@@ -12,24 +12,14 @@ package com.javarush.task.task20.task2025;
  */
 public class Shift {
 
-    /** */
     static int counter = 0;
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
-
         int[] arr = {0, 1, 2, 3, 4, 6, 0};
         printArr(null, arr);
         shifter(new int[] {}, arr);
     }
 
-    /**
-     *
-     * @param arrHead
-     * @param arrTail
-     */
     private static void shifter(int[] arrHead, int[] arrTail) {
 
         if (arrTail.length <= 1) {
@@ -49,11 +39,6 @@ public class Shift {
         }
     }
 
-
-    /**
-     * @param arr
-     * @param shift
-     */
     private static void shiftOn(int[] arr, int shift) {
         if (shift % arr.length != 0) {
             reverse(arr, 0, shift - 1);
@@ -63,11 +48,6 @@ public class Shift {
 
     }
 
-
-
-    /**
-     * @param arr
-     */
     private static int[] decrementArr(int[] arr) {
 
         int[] arrNext = new int [arr.length - 1];
@@ -77,12 +57,6 @@ public class Shift {
         return arrNext;
     }
 
-    /**
-     *
-     * @param arr
-     * @param num
-     * @return
-     */
     private static int[] incrementArr(int[] arr, int num) {
         int[] arrNext = new int [arr.length + 1];
         for (int item = 0; item < arr.length; item++) {
@@ -93,12 +67,7 @@ public class Shift {
     }
 
 
-    /**
-     *
-     * @param arrBuf
-     * @param firstCycleElement
-     * @param secondCycleElement
-     */
+
     private static void reverse(int[] arrBuf, int first, int second) {
         int buf;
 
@@ -110,10 +79,7 @@ public class Shift {
         arrBuf[secondCycleElement] = buf;
     }
 
-    /**
-     *
-     * @param arr
-     */
+
     private static void printArr(int[] arrHead, int[] arrTail) {
         System.out.print(++counter + ": ");
         if (arrHead != null && arrHead.length != 0) {

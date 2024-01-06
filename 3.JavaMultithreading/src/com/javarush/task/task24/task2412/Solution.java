@@ -42,7 +42,7 @@ public class Solution {
     }
 
     public static void sort(List<Stock> list) {
-        list.sort(new Comparator<Stock>() {
+        list.sort(new Comparator<>() {
             public int compare(Stock stock1, Stock stock2) {
                 int compare;
                 return (compare = compareName(stock1, stock2)) != 0 ? compare

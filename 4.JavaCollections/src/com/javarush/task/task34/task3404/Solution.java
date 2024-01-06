@@ -142,7 +142,7 @@ public class Solution {
         Matcher m = compareWithDecimals.matcher(workWith);
         while (m.find()) {
             String ourDouble = m.group();
-            doubles.add(new Double(ourDouble));
+            doubles.add(Double.valueOf(ourDouble));
             workWith = workWith.replaceFirst(ourDouble, "D");
         }
         workWith = workWith.replaceAll(" ", "");
@@ -171,7 +171,7 @@ public class Solution {
                         if (operation.equals("=") || operation.equals("%")) {
                             Double d2 = d.removeLast();
                             res = makeOperation(operation, 0.0, d2);
-                            res = new Double(df.format(res));
+                            res = Double.valueOf(df.format(res));
                             d.add(res);
                             if (operators.size() > 0) {
                                 lastOperPriority = getPriority(operators.getLast());
@@ -193,7 +193,7 @@ public class Solution {
                             d2 = d.removeLast();
                             res = makeFunction(operation, d2);
                         }
-                        res = new Double(df.format(res));
+                        res = Double.valueOf(df.format(res));
                         d.add(res);
                         if (operators.size() > 0) {
                             lastOperPriority = getPriority(operators.getLast());
@@ -216,7 +216,7 @@ public class Solution {
                     if (operation.equals("=") || operation.equals("%")) {
                         d2 = d.removeLast();
                         res = makeOperation(operation, 0.0, d2);
-                        res = new Double(df.format(res));
+                        res = Double.valueOf(df.format(res));
                         d.add(res);
                         continue;
                     }
@@ -233,7 +233,7 @@ public class Solution {
                         d2 = d.removeLast();
                         res = makeFunction(operation, d2);
                     }
-                    res = new Double(df.format(res));
+                    res = Double.valueOf(df.format(res));
                     d.add(res);
                 }
             }
@@ -246,7 +246,7 @@ public class Solution {
             if (operation.equals("=") || operation.equals("%")) {
                 d2 = d.removeLast();
                 res = makeOperation(operation, 0.0, d2);
-                res = new Double(df.format(res));
+                res = Double.valueOf(df.format(res));
                 d.add(res);
                 continue;
             }
@@ -262,7 +262,7 @@ public class Solution {
                 d2 = d.removeLast();
                 res = makeFunction(operation, d2);
             }
-            res = new Double(df.format(res));
+            res = Double.valueOf(df.format(res));
             d.add(res);
         }
         sb = new StringBuilder();
