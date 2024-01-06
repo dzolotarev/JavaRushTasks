@@ -282,7 +282,7 @@ public class Solution {
         Pattern compareWithDecimalss = Pattern.compile("^-?((\\d*\\.\\d*([eE][\\+\\-]?\\d+)?)|\\d+)$");
         Matcher mmm = compareWithDecimalss.matcher(expression);
         if (mmm.matches()) {
-            Double d = new Double(expression);
+            Double d = Double.valueOf(expression);
             NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.ENGLISH);
             numberFormat.setRoundingMode(RoundingMode.HALF_EVEN);
             DecimalFormat df = (DecimalFormat) numberFormat;
