@@ -1,133 +1,133 @@
 package com.javarush.task.task20.task2025;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-/*
+/* 
 Алгоритмы-числа
 */
 
-
 public class Solution {
-    private static final long[][] powMatrix;
-    private static Set<Long> recurrence = new HashSet<>();
 
-    static {
-        powMatrix = new long[11][20];
-        for (int i = 0; i < powMatrix.length; i++) {
-            long p = 1;
-            for (int j = 0; j < powMatrix[i].length; j++) {
-                powMatrix[i][j] = p;
-                p *= i;
-            }
-        }
+    private static long S;
+    private static int N;
+    private static int[] digitsMultiSet;
+    private static int[] testMultiSet;
 
-    }
+    private static List<Long> results;
+    private static long maxPow;
+    private static long minPow;
 
-    public static long[] digitazer(long number) {
-
-        ArrayList<Long> tmp = new ArrayList<>();
-        if (number < 0) {
-            System.out.println("Negative " + number);
-        }
-        if (number < 10) {
-            return new long[]{number};
-        }
-        long r = number;
-        while (r != 0) {
-            long q = r % 10;
-            r = r / 10;
-            tmp.add(q);
-        }
-
-        long[] result = new long[tmp.size()];
-        for (int i = 0; i < tmp.size(); i++) {
-            result[tmp.size() - 1 - i] = tmp.get(i);
-        }
-
-        return result;
-    }
-
-    public static void permutation(long[] array, int k) {
-        if (k == 1) {
-            long number = 0;
-            for (int i = 0; i < array.length; i++) {
-                number += array[array.length - 1 - i] * powMatrix[10][i];
-            }
-            recurrence.add(number);
-            return;
-        }
-        for (int i = 0; i < k; i++) {
-            permutation(array, k - 1);
-            if (k % 2 == 0) {
-                long temp = array[i];
-                array[i] = array[k - 1];
-                array[k - 1] = temp;
-            } else {
-                long temp = array[0];
-                array[0] = array[k - 1];
-                array[k - 1] = temp;
-            }
-
-        }
-    }
-
-
-    public static long[] getNumbers(long N) {
-
-        long[] result;
-        int checkDigits = -1;
-        List<Long> res = new ArrayList<>();
-        for (long k = 0; k < N; k++) {
-            if (recurrence.contains(k)) {
-                continue;
-            }
-            int digits = 0;
-
-            long sum = 0;
-            long currentNumber = k;
-            while (currentNumber != 0) {
-                currentNumber /= 10;
-                ++digits;
-            }
-            if (digits != checkDigits) {
-                checkDigits = digits;
-                recurrence = new HashSet<>();
-            }
-            currentNumber = k;
-            while (currentNumber != 0) {
-                long reminder = currentNumber % 10;
-                sum += powMatrix[(int) reminder][digits];
-                currentNumber /= 10;
-            }
-            if (sum == 0) continue;
-            if (sum == k) {
-                long[] array = digitazer(k);
-                int length = array.length;
-                permutation(array, length);
-                res.add(k);
-            }
-        }
-
-
-        result = new long[res.size()];
-        for (int i = 0; i < res.size(); i++) {
-            result[i] = res.get(i);
-        }
-        return result;
-    }
+    private static long[][] pows;
 
     public static void main(String[] args) {
         long a = System.currentTimeMillis();
-//        System.out.println(Arrays.toString(getNumbers(1000)));
+        System.out.println(Arrays.toString(getNumbers(1000)));
         long b = System.currentTimeMillis();
-//        System.out.println("memory " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (8 * 1024));
-//        System.out.println("time = " + (b - a) / 1000);
+        System.out.println("memory " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (8 * 1024));
+        System.out.println("time = " + (b - a) / 1000);
 
         a = System.currentTimeMillis();
-
-        System.out.println(Arrays.toString(getNumbers(1000000000L)));
+        System.out.println(Arrays.toString(getNumbers(1000000000000000000L)));
         b = System.currentTimeMillis();
         System.out.println("memory " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (8 * 1024));
-        System.out.println("time = " + (b - a) + " ms");
+        System.out.println("time = " + (b - a) / 1000);
+    }
+
+    public static long[] getNumbers(long upperLimit) {
+        if (upperLimit <= 1) return new long[0];
+
+        S = upperLimit;
+        List<Long> armstrongList = generate(String.valueOf(S).length() + 1);
+        long[] result = new long[armstrongList.size()];
+
+        for (int i = 0; i < armstrongList.size(); i++) {
+            result[i] = armstrongList.get(i);
+        }
+        return result;
+    }
+
+    private static void genPows(int N) {
+        if (N > 20) throw new IllegalArgumentException();
+        pows = new long[10][N + 1];
+        for (int i = 0; i < pows.length; i++) {
+            long p = 1;
+            for (int j = 0; j < pows[i].length; j++) {
+                pows[i][j] = p;
+                p *= i;
+            }
+        }
+    }
+
+    private static boolean check(long pow) {
+        if (pow >= maxPow) return false;
+        if (pow < minPow) return false;
+
+        for (int i = 0; i < 10; i++) {
+            testMultiSet[i] = 0;
+        }
+
+        while (pow > 0) {
+            int i = (int) (pow % 10);
+            testMultiSet[i]++;
+            if (testMultiSet[i] > digitsMultiSet[i]) return false;
+            pow = pow / 10;
+        }
+
+        for (int i = 0; i < 10; i++) {
+            if (testMultiSet[i] != digitsMultiSet[i]) return false;
+        }
+
+        return true;
+    }
+
+    private static void search(int digit, int unused, long pow) {
+        if (pow >= maxPow) return;
+
+        if (digit == -1) {
+            if (check(pow) && pow < S) results.add(pow);
+            return;
+        }
+
+        if (digit == 0) {
+            digitsMultiSet[digit] = unused;
+            search(digit - 1, 0, pow + unused * pows[digit][N]);
+        } else {
+            // Check if we can generate more than minimum
+            if (pow + unused * pows[digit][N] < minPow) return;
+
+            long p = pow;
+            for (int i = 0; i <= unused; i++) {
+                digitsMultiSet[digit] = i;
+                search(digit - 1, unused - i, p);
+                if (i != unused) {
+                    p += pows[digit][N];
+                    // Check maximum and break the loop - doesn't help
+                    // if (p >= maxPow) break;
+                }
+            }
+        }
+    }
+
+    private static List<Long> generate(int maxN) {
+        if (maxN >= 21) throw new IllegalArgumentException();
+
+        genPows(maxN);
+        results = new ArrayList<>();
+        digitsMultiSet = new int[10];
+        testMultiSet = new int[10];
+
+        for (N = 1; N < maxN; N++) {
+            minPow = (long) Math.pow(10, N - 1);
+            maxPow = (long) Math.pow(10, N);
+
+            search(9, N, 0);
+        }
+
+        Collections.sort(results);
+
+        return results;
     }
 }

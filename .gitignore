@@ -8,9 +8,9 @@ target/
 *.iml
 *.iws
 *.class
+*.info
 *.properties
 *.jar
-*.dylib
 
 
 /5.OnlineInternship/

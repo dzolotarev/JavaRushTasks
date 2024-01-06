@@ -25,7 +25,7 @@ public class Solution {
         String[] filepart = {"change {4}", "open {2} and last {3}"};
 
         ChoiceFormat fileform = new ChoiceFormat(filelimits, filepart);
-        Format[] testFormats = {null, dateFormat, fileform};
+        Format[] testFormats = {null, null, dateFormat, fileform};
         MessageFormat pattform = new MessageFormat("{0}   {1} | {5} {6}");
         pattform.setFormats(testFormats);
 
@@ -42,9 +42,46 @@ public class Solution {
     }
 
     public static void sort(List<Stock> list) {
-        list.sort(new Comparator<Stock>() {
+        list.sort(new Comparator<>() {
             public int compare(Stock stock1, Stock stock2) {
-                return 0;
+                int compare;
+                return (compare = compareName(stock1, stock2)) != 0 ? compare
+                        : (compare = compareDate(stock1, stock2)) != 0 ? compare
+                        : compareProfit(stock1, stock2);
+            }
+
+            private int compareName(Stock stock1, Stock stock2) {
+                String name1 = ((String) stock1.get("name"));
+                String name2 = ((String) stock2.get("name"));
+                return name1.compareTo(name2);
+            }
+
+            private int compareDate(Solution.Stock stock1, Solution.Stock stock2) {
+                long oneDay = 24 * 60 * 60 * 1000;
+                Long d1 = ((Date) stock1.get("date")).getTime() / oneDay;
+                Long d2 = ((Date) stock2.get("date")).getTime() / oneDay;
+                return d2.compareTo(d1);
+            }
+
+            private int compareProfit(Stock stock1, Stock stock2) {
+                int profit1 = getProfitPercentage(stock1);
+                int profit2 = getProfitPercentage(stock2);
+                return profit2 - profit1;
+            }
+
+            private int getProfitPercentage(Stock stock) {
+                double res;
+                if (stock.containsKey("change")) {
+                    res = !stock.containsKey("change") ? 0 : ((double) stock.get("change"));
+                } else if (stock.containsKey("open") && stock.containsKey("last")) {
+                    double open = ((double) stock.get("open"));
+                    double last = ((double) stock.get("last"));
+                    res = last - open;
+                } else {
+                    throw new RuntimeException("Incorrect data");
+                }
+
+                return (int) (res * 1000);
             }
         });
     }
@@ -55,7 +92,7 @@ public class Solution {
             put("symbol", symbol);
             put("open", open);
             put("last", last);
-            put("date", getRandomDate(2020));
+            put("date", getRandomDate(java.time.LocalDate.now().getYear() + 1));
         }
 
         public Stock(String name, String symbol, double change, Date date) {

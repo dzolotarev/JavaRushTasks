@@ -25,6 +25,7 @@ fun main() {
 //            println(array[i])
 //        }
         array.forEach { x -> println(x) }
+        println(array.joinToString("|","[","]"))
     }
 
 }

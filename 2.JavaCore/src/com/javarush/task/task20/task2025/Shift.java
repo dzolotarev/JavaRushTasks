@@ -12,17 +12,13 @@ package com.javarush.task.task20.task2025;
  */
 public class Shift {
 
-    /** */
     static int counter = 0;
 
-
     public static void main(String[] args) {
-
         int[] arr = {0, 1, 2, 3, 4, 6, 0};
         printArr(null, arr);
         shifter(new int[] {}, arr);
     }
-
 
     private static void shifter(int[] arrHead, int[] arrTail) {
 
@@ -43,8 +39,6 @@ public class Shift {
         }
     }
 
-
-
     private static void shiftOn(int[] arr, int shift) {
         if (shift % arr.length != 0) {
             reverse(arr, 0, shift - 1);
@@ -54,8 +48,6 @@ public class Shift {
 
     }
 
-
-
     private static int[] decrementArr(int[] arr) {
 
         int[] arrNext = new int [arr.length - 1];
@@ -64,7 +56,6 @@ public class Shift {
         }
         return arrNext;
     }
-
 
     private static int[] incrementArr(int[] arr, int num) {
         int[] arrNext = new int [arr.length + 1];
